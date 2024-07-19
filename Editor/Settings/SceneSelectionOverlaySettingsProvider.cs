@@ -13,7 +13,9 @@ namespace Tools.Editor.SceneSelection
             IEnumerable<string> keywords = null) : base(path, scopes, keywords) { }
 
         private readonly GUIContent _addSceneButton =
-            new("Add Scene", "Add a scene to appear in the Build Scenes of the tool");
+            new("Add Scene", "Add a scene to appear in the Build Scenes dropdown");
+
+        private readonly GUIContent _removeSceneButton = new("Remove", "Removes the scene from the Build Scene");
 
         public override void OnGUI(string searchContext)
         {
@@ -60,7 +62,7 @@ namespace Tools.Editor.SceneSelection
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.ObjectField(scene, typeof(SceneAsset), false);
-                if (GUILayout.Button("Remove", GUILayout.Width(60f)))
+                if (GUILayout.Button(_removeSceneButton, GUILayout.Width(60f)))
                 {
                     SceneSelectionOverlaySettings.instance.RemoveScene(scene);
                 }
@@ -82,7 +84,7 @@ namespace Tools.Editor.SceneSelection
         [SettingsProvider]
         public static SettingsProvider CreateSettingsProvider()
         {
-            return new SceneSelectionOverlaySettingsProvider(SelectionOverlayPath, SettingsScope.Project);
+            return new SceneSelectionOverlaySettingsProvider(SelectionOverlayPath, SettingsScope.User);
         }
     }
 }
