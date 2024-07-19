@@ -1,11 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
-
 
 namespace Tools.Editor.SceneSelection
 {
@@ -31,7 +27,7 @@ namespace Tools.Editor.SceneSelection
             return GetAllScenesPath().Except(GetAllBuildScenesPath());
         }
 
-#if UNITY_EDITOR
+
         [Pure]
         public static IEnumerable<SceneAsset> GetAllSceneAssets()
         {
@@ -43,6 +39,5 @@ namespace Tools.Editor.SceneSelection
         {
             return GetAllScenesPathWithoutBuildScenes().Select(AssetDatabase.LoadAssetAtPath<SceneAsset>);
         }
-#endif
     }
 }
