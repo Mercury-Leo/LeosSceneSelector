@@ -1,6 +1,6 @@
 {
   "name": "com.leosclockworks.tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Leo's Scene Selector",
   "description": "A simple tool to change Unity scenes.",
   "keywords": [
