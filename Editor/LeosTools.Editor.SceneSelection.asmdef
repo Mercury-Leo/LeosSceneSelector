@@ -1,6 +1,6 @@
 {
-    "name": "Tools.Editor.SceneSelection",
-    "rootNamespace": "Tools.Editor.SceneSelection",
+    "name": "LeosTools.Editor.SceneSelection",
+    "rootNamespace": "",
     "references": [],
     "includePlatforms": [
         "Editor"
