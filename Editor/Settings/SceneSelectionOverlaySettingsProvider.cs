@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using static Tools.Editor.SceneSelection.SceneSelectionConfig;
 
 namespace Tools.Editor.SceneSelection
 {
-    using static SceneSelectionConfig;
-
     internal sealed class SceneSelectionOverlaySettingsProvider : SettingsProvider
     {
         private SceneSelectionOverlaySettingsProvider(string path, SettingsScope scopes,

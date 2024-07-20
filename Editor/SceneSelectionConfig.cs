@@ -2,7 +2,7 @@ namespace Tools.Editor.SceneSelection
 {
     internal static class SceneSelectionConfig
     {
-        public const string SelectionOverlayPath = "Tools/Scene Selection";
+        public const string SelectionOverlayPath = "Leo's Tools/Scene Selection";
         public const string SelectionProjectSettingsPath = "ProjectSettings/SceneSelectionOverlaySettings.asset";
         public const string AdditiveOptionLabel = "Additive Option";
         public const string NotificationsLabel = "Enable Notifications";
