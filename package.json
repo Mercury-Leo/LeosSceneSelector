@@ -1,5 +1,5 @@
 {
-  "name": "com.leosclockworks.SceneSelector",
+  "name": "com.leosclockworks.sceneselector",
   "version": "1.0.2",
   "displayName": "Leo's Scene Selector",
   "description": "A simple tool to change Unity scenes.",
