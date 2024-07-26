@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,9 +13,10 @@ namespace Tools.Editor.SceneSelection
         [SerializeField] private bool _notificationsEnabled;
 
         [SerializeField] private List<SceneAsset> _addedScenes = new();
-        
+        private readonly HashSet<string> _addedScenePaths = new();
+
         public IReadOnlyList<SceneAsset> AddedScenes => _addedScenes;
-        public IEnumerable<string> AddedScenesPath => AddedScenes.Select(scene => scene.name);
+        public IEnumerable<string> AddedScenePaths => _addedScenePaths;
 
         public bool AdditiveOptionEnabled
         {
@@ -45,7 +45,9 @@ namespace Tools.Editor.SceneSelection
                 return;
             }
 
+            _addedScenePaths.Add(GetScenePath(scene));
             _addedScenes.Add(scene);
+            Save(true);
             EditorUtility.SetDirty(this);
         }
 
@@ -53,8 +55,23 @@ namespace Tools.Editor.SceneSelection
         {
             if (_addedScenes.Remove(scene))
             {
+                _addedScenePaths.Remove(GetScenePath(scene));
+                Save(true);
                 EditorUtility.SetDirty(this);
             }
+        }
+
+        private string GetScenePath(SceneAsset scene)
+        {
+            var path = AssetDatabase.GetAssetPath(scene);
+
+            if (string.IsNullOrEmpty(path))
+            {
+                Debug.LogWarning($"Could not find path for {scene}", scene);
+                return string.Empty;
+            }
+
+            return path;
         }
     }
 }
