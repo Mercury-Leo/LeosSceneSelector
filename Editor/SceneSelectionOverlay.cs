@@ -64,7 +64,7 @@ namespace Tools.Editor.SceneSelection
             {
                 var activeScene = SceneManager.GetActiveScene();
                 var buildScenes = SceneExtensions.GetAllBuildScenesPath();
-                var addedScenes = SceneSelectionOverlaySettings.instance.AddedScenesPath;
+                var addedScenes = SceneSelectionOverlaySettings.instance.AddedScenePaths;
                 var scenes = buildScenes.Concat(addedScenes);
 
                 CreateScenes(menu, scenes, activeScene);
