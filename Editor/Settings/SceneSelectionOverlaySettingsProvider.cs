@@ -72,11 +72,7 @@ namespace Tools.Editor.SceneSelection
 
         private void AddScene(SceneAsset scene)
         {
-            if (!SceneSelectionOverlaySettings.instance.AddedScenes.Contains(scene))
-            {
-                SceneSelectionOverlaySettings.instance.AddScene(scene);
-                EditorUtility.SetDirty(SceneSelectionOverlaySettings.instance);
-            }
+            SceneSelectionOverlaySettings.instance.AddScene(scene);
         }
 
 
