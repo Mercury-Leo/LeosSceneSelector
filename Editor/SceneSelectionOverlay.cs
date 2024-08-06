@@ -23,7 +23,6 @@ namespace Tools.Editor.SceneSelection
         {
             public const string ID = "SceneSelectionOverlay/SceneDropdownToggle";
             public EditorWindow containerWindow { get; set; }
-            private bool _isBuildScenes;
             private readonly GUIContent _notificationContent = new();
 
             private SceneDropdownToggle()
@@ -42,7 +41,7 @@ namespace Tools.Editor.SceneSelection
                 AddSceneLoadTypeToggle(menu);
                 menu.AddSeparator(string.Empty);
 
-                if (_isBuildScenes)
+                if (SceneSelectionOverlaySettings.instance.IsBuildScenes)
                 {
                     CreateBuildScenes(menu);
                 }
@@ -56,8 +55,13 @@ namespace Tools.Editor.SceneSelection
 
             private void AddSceneLoadTypeToggle(GenericMenu menu)
             {
-                var buttonName = _isBuildScenes ? AllScenesLabel : BuildScenesLabel;
-                menu.AddItem(new GUIContent(buttonName), true, () => _isBuildScenes = !_isBuildScenes);
+                var buttonName = SceneSelectionOverlaySettings.instance.IsBuildScenes
+                    ? AllScenesLabel
+                    : BuildScenesLabel;
+
+                menu.AddItem(new GUIContent(buttonName), true,
+                    () => SceneSelectionOverlaySettings.instance.IsBuildScenes =
+                        !SceneSelectionOverlaySettings.instance.IsBuildScenes);
             }
 
             private void CreateBuildScenes(GenericMenu menu)

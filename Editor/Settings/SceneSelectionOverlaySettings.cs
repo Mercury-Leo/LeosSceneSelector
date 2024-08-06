@@ -11,6 +11,7 @@ namespace Tools.Editor.SceneSelection
     {
         [SerializeField] private bool _additiveOptionEnabled;
         [SerializeField] private bool _notificationsEnabled;
+        [SerializeField] private bool isBuildScenes;
 
         [SerializeField] private List<SceneAsset> _addedScenes = new();
         private readonly HashSet<string> _addedScenePaths = new();
@@ -34,6 +35,16 @@ namespace Tools.Editor.SceneSelection
             set
             {
                 _notificationsEnabled = value;
+                Save(true);
+            }
+        }
+
+        public bool IsBuildScenes
+        {
+            get => isBuildScenes;
+            set
+            {
+                isBuildScenes = value;
                 Save(true);
             }
         }
