@@ -3,7 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using UnityEditor;
 
-namespace Tools.Editor.SceneSelection
+namespace LeosSceneSelector.Editor
 {
     public static class SceneExtensions
     {

@@ -1,4 +1,4 @@
-namespace Tools.Editor.SceneSelection
+namespace LeosSceneSelector.Editor
 {
     internal static class SceneSelectionConfig
     {

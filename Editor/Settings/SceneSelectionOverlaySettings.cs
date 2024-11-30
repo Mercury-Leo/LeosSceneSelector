@@ -2,40 +2,50 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Tools.Editor.SceneSelection
+namespace LeosSceneSelector.Editor
 {
     using static SceneSelectionConfig;
 
     [FilePath(SelectionProjectSettingsPath, FilePathAttribute.Location.ProjectFolder)]
     internal sealed class SceneSelectionOverlaySettings : ScriptableSingleton<SceneSelectionOverlaySettings>
     {
-        [SerializeField] private bool _additiveOptionEnabled;
-        [SerializeField] private bool _notificationsEnabled;
+        [SerializeField] private bool additiveOptionEnabled;
+        [SerializeField] private bool notificationsEnabled;
         [SerializeField] private bool isBuildScenes;
 
-        [SerializeField] private List<SceneAsset> _addedScenes = new();
+        [SerializeField] private List<SceneAsset> addedScenes = new();
         private readonly HashSet<string> _addedScenePaths = new();
 
-        public IReadOnlyList<SceneAsset> AddedScenes => _addedScenes;
+        public IReadOnlyList<SceneAsset> AddedScenes => addedScenes;
         public IEnumerable<string> AddedScenePaths => _addedScenePaths;
 
         public bool AdditiveOptionEnabled
         {
-            get => _additiveOptionEnabled;
+            get => additiveOptionEnabled;
             set
             {
-                _additiveOptionEnabled = value;
-                Save(true);
+                if (additiveOptionEnabled == value)
+                {
+                    return;
+                }
+
+                additiveOptionEnabled = value;
+                SaveAndSetDirty();
             }
         }
 
         public bool NotificationsEnabled
         {
-            get => _notificationsEnabled;
+            get => notificationsEnabled;
             set
             {
-                _notificationsEnabled = value;
-                Save(true);
+                if (notificationsEnabled == value)
+                {
+                    return;
+                }
+
+                notificationsEnabled = value;
+                SaveAndSetDirty();
             }
         }
 
@@ -51,20 +61,20 @@ namespace Tools.Editor.SceneSelection
 
         public void AddScene(SceneAsset scene)
         {
-            if (_addedScenes.Contains(scene))
+            if (addedScenes.Contains(scene))
             {
                 return;
             }
 
             _addedScenePaths.Add(GetScenePath(scene));
-            _addedScenes.Add(scene);
+            addedScenes.Add(scene);
             Save(true);
             EditorUtility.SetDirty(this);
         }
 
         public void RemoveScene(SceneAsset scene)
         {
-            if (_addedScenes.Remove(scene))
+            if (addedScenes.Remove(scene))
             {
                 _addedScenePaths.Remove(GetScenePath(scene));
                 Save(true);
@@ -83,6 +93,12 @@ namespace Tools.Editor.SceneSelection
             }
 
             return path;
+        }
+
+        private void SaveAndSetDirty()
+        {
+            Save(true);
+            EditorUtility.SetDirty(this);
         }
     }
 }

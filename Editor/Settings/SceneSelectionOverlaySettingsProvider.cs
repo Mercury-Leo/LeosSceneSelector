@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using static Tools.Editor.SceneSelection.SceneSelectionConfig;
+using static LeosSceneSelector.Editor.SceneSelectionConfig;
 
-namespace Tools.Editor.SceneSelection
+namespace LeosSceneSelector.Editor
 {
     internal sealed class SceneSelectionOverlaySettingsProvider : SettingsProvider
     {

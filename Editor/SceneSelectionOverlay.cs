@@ -8,9 +8,9 @@ using UnityEditor.SceneManagement;
 using UnityEditor.Toolbars;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static Tools.Editor.SceneSelection.SceneSelectionConfig;
+using static LeosSceneSelector.Editor.SceneSelectionConfig;
 
-namespace Tools.Editor.SceneSelection
+namespace LeosSceneSelector.Editor
 {
     [Overlay(typeof(SceneView), "Scene Selection")]
     [Icon(IconPath)]
