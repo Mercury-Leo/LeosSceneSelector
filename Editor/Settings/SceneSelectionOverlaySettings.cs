@@ -19,6 +19,14 @@ namespace LeosSceneSelector.Editor
         public IReadOnlyList<SceneAsset> AddedScenes => addedScenes;
         public IEnumerable<string> AddedScenePaths => _addedScenePaths;
 
+        private void OnEnable()
+        {
+            foreach (var scene in addedScenes)
+            {
+                _addedScenePaths.Add(GetScenePath(scene));
+            }
+        }
+
         public bool AdditiveOptionEnabled
         {
             get => additiveOptionEnabled;
@@ -55,7 +63,7 @@ namespace LeosSceneSelector.Editor
             set
             {
                 isBuildScenes = value;
-                Save(true);
+                SaveAndSetDirty();
             }
         }
 
@@ -68,8 +76,7 @@ namespace LeosSceneSelector.Editor
 
             _addedScenePaths.Add(GetScenePath(scene));
             addedScenes.Add(scene);
-            Save(true);
-            EditorUtility.SetDirty(this);
+            SaveAndSetDirty();
         }
 
         public void RemoveScene(SceneAsset scene)
@@ -77,8 +84,7 @@ namespace LeosSceneSelector.Editor
             if (addedScenes.Remove(scene))
             {
                 _addedScenePaths.Remove(GetScenePath(scene));
-                Save(true);
-                EditorUtility.SetDirty(this);
+                SaveAndSetDirty();
             }
         }
 
@@ -99,6 +105,7 @@ namespace LeosSceneSelector.Editor
         {
             Save(true);
             EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
         }
     }
 }

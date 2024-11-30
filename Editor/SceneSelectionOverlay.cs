@@ -98,6 +98,13 @@ namespace LeosSceneSelector.Editor
                 }
             }
 
+            /// <summary>
+            /// Populates the dropdown based on user's preferences
+            /// </summary>
+            /// <param name="menu"></param>
+            /// <param name="path"></param>
+            /// <param name="sceneName"></param>
+            /// <param name="activeScene"></param>
             private void AddSceneMenuItems(GenericMenu menu, string path, string sceneName, Scene activeScene)
             {
                 if (SceneSelectionOverlaySettings.instance.AdditiveOptionEnabled)
